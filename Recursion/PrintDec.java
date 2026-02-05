@@ -12,6 +12,7 @@ class PrintDec{
         System.out.print(n+"");
         Dec(n-1);
     }
+    
 
     public static void main(String args[]){
         Dec(5);
