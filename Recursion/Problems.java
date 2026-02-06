@@ -18,12 +18,36 @@ public class Problems {
         return n+ SumOfN(n-1);
     }
 
-    public static void main(String args[]){
-        int Ans = Factorial(4);
-        System.out.println(Ans);
+    public static int tilingProblem(int n){
+        if(n==1 || n==0) return 1;
 
-        int Sum = SumOfN(5);
-        System.out.println(Sum);
+        int fnm1 = tilingProblem(n-1); //Vertical tiling
+        int fnm2 = tilingProblem(n-2); //Horizontal tiling
+
+        int total_tiling = fnm1 + fnm2;
+
+        return total_tiling;
+    }
+
+    public static int tilingProblem22Board(int n){
+        if(n==1 || n==0 ||n==2) return 1;
+
+        int fnm2 = tilingProblem(n-2); //tiling 2*2
+
+        return fnm2;
+    }
+
+    public static void main(String args[]){
+        // int Ans = Factorial(4);
+        // System.out.println(Ans);
+
+        // int Sum = SumOfN(5);
+        // System.out.println(Sum);
+
+        // int tiling = tilingProblem(4);
+        // System.out.println(tiling);
+
+        System.out.println(tilingProblem22Board(16));
 
     }
 }
