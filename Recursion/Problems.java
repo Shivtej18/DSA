@@ -37,6 +37,11 @@ public class Problems {
         return fnm2;
     }
 
+    public static int friendsPairing(int n) {               // Qn13 Goldman Sachs
+         if(n==1 || n==2) return n;
+        return friendsPairing(n-1) + (n-1)*friendsPairing(n-2); 
+    }
+
     public static void main(String args[]){
         // int Ans = Factorial(4);
         // System.out.println(Ans);
@@ -47,7 +52,10 @@ public class Problems {
         // int tiling = tilingProblem(4);
         // System.out.println(tiling);
 
-        System.out.println(tilingProblem22Board(16));
+        int ways_toPair = friendsPairing(3);
+
+        System.out.println(ways_toPair);
+
 
     }
 }
