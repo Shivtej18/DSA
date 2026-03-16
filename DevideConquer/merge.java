@@ -2,6 +2,8 @@ package DevideConquer;
 
 public class merge{
 
+    static int inversionCount = 0;
+
     public static void printArray(int arr[]){
         for(int i=0; i<arr.length ; i++){
             System.out.print(arr[i] + " ");
@@ -32,6 +34,8 @@ public class merge{
                 i++;
             }else{
                 temp[k]=arr[j];
+                //inversion count
+                inversionCount += mid-i+1;
                 j++;
             }
             k++;
@@ -59,5 +63,6 @@ public class merge{
         int ei= arr.length-1;
         mergeSort(arr,0,ei);
         printArray(arr);
+        System.out.println("Inversion count is: "+inversionCount);
     }
 }
