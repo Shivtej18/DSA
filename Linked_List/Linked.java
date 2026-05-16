@@ -1,78 +1,152 @@
 package Linked_List;
 
-import java.util.LinkedList;
-
 public class Linked {
-    // Node = one element
-    // Linked = manages full list
-    // Node stores data, Linked manages the list.
-    // Linked List (Java) – Quick Notes
-    // Node class
-    // Represents a single element
-    // Contains:
-    // data
-    // next pointer
-    // Only used as a building block
-    // Linked class (Main class)
-    // Represents the entire linked list
-    // Contains:
-    // head (start of list)
-    // tail (end of list)
-    // Implements operations like:
-    // addFirst()
-    // addLast()
-    // delete()
+
+    public int size; // removed static
 
     public static class Node {
-        int Data;
-        Node Next;
+        int data;
+        Node next;
 
-        // Constructor
-        Node(int Data) {
-            this.Data = Data;
-            this.Next = null;
+        Node(int data) {
+            this.data = data;
+            this.next = null;
         }
- 
     }
 
-    // There is only one head and only one tail in LL therefore we can define them
-    // within class itself.
     Node head;
     Node tail;
 
-    public void addFirst(int Data) {
-        // step 1: creaete new node
-        Node newNode = new Node(Data);
-        // If empty
+    // ✅ Add First
+    public void addFirst(int data) {
+        Node newNode = new Node(data);
+
         if (head == null) {
             head = tail = newNode;
+            size++;
             return;
         }
 
-        // Step 2 :Link-> Newnode next = head
-        newNode.Next = head;
-        // step 3 : head = newnode
+        newNode.next = head;
         head = newNode;
-
+        size++;
     }
 
-    // helper to check
+    // ✅ Add Last (NEW METHOD)
+    public void addLast(int data) {
+        Node newNode = new Node(data);
+
+        if (head == null) {
+            head = tail = newNode;
+            size++;
+            return;
+        }
+
+        tail.next = newNode;
+        tail = newNode;
+        size++;
+    }
+
+    // ✅ Print
     public void print() {
         Node temp = head;
         while (temp != null) {
-            System.out.print(temp.Data + " -> ");
-            temp = temp.Next;
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
         }
         System.out.println("null");
     }
 
+    // ✅ Remove First
+    public void removeFirst() {
+        if (head == null) {
+            System.out.println("LL is empty");
+            return;
+        }
+
+        if (size == 1) {
+            head = tail = null;
+            size = 0;
+            return;
+        }
+
+        head = head.next;
+        size--;
+    }
+
+    // Remove Last
+    public void removeLast() {
+        if (head == null) {
+            System.out.println("LL is empty");
+            return;
+        }
+
+        if (size == 1) {
+            head = tail = null;
+            size = 0;
+            return; // IMPORTANT
+        }
+
+        Node prev = head;
+
+        for (int i = 0; i < size - 2; i++) {
+            prev = prev.next;
+        }
+
+        prev.next = null;
+        tail = prev;
+        size--;
+    }
+
+    // Remove Nth from last
+    public void removeNthLast(int n) {
+        int sz = 0;
+        Node temp = head;
+
+        // calculate size
+        while (temp != null) {
+            temp = temp.next;
+            sz++;
+        }
+
+        // remove first node
+        if (n == sz) {
+            head = head.next;
+            return;
+        }
+
+        int i = 1;
+        int iToFind = sz - n;
+        Node prev = head;
+
+        while (i < iToFind) {
+            prev = prev.next;
+            i++;
+        }
+
+        // remove node
+        prev.next = prev.next.next;
+    }
+
     public static void main(String args[]) {
         Linked ll = new Linked();
-        ll.addFirst(2);
-        ll.addFirst(2);
-        ll.addFirst(1);
+
+        // ll.addFirst(2);
+        // ll.addFirst(2);
+        // ll.addFirst(1);
+
+        // ll.print(); // 1 -> 2 -> 2 -> null
+        // System.out.println(ll.size);
+
+        ll.addLast(1);
+        ll.addLast(2);
+        ll.addLast(3);
+        ll.addLast(4);
+        ll.addLast(5);
+        ll.print();
+
+        ll.removeNthLast(3);
 
         ll.print();
     }
-
 }
