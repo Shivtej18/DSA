@@ -11,7 +11,6 @@ public class subarray {
         }   
      }
 
-
     public static void main(String args[]){
          int array[] = {12,34,5,76,93};
          sub(array);

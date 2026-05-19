@@ -128,6 +128,62 @@ public class Linked {
         prev.next = prev.next.next;
     }
 
+    // slow-fast method to find middle node
+    // Function to find middle node
+    public Node findMid(Node head) {
+
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+    public boolean isPalindrome(Node head) {
+
+        // Empty list or single node
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        // Step 1: Find middle
+        Node midNode = findMid(head);
+
+        // Step 2: Reverse second half
+        Node prev = null;
+        Node curr = midNode;
+        Node next;
+
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        // prev becomes head of reversed second half
+        Node right = prev;
+        Node left = head;
+
+        // Step 3: Compare both halves
+        while (right != null) {
+
+            if (left.data != right.data) {
+                return false;
+            }
+
+            left = left.next;
+            right = right.next;
+        }
+
+        return true;
+    }
+
+
     public static void main(String args[]) {
         Linked ll = new Linked();
 
@@ -140,13 +196,11 @@ public class Linked {
 
         ll.addLast(1);
         ll.addLast(2);
-        ll.addLast(3);
-        ll.addLast(4);
-        ll.addLast(5);
+        ll.addLast(2);
+        ll.addLast(1);
         ll.print();
 
-        ll.removeNthLast(3);
-
-        ll.print();
+        System.out.println(ll.isPalindrome(ll.head));
+        
     }
 }
