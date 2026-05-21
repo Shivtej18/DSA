@@ -183,6 +183,20 @@ public class Linked {
         return true;
     }
 
+        public boolean isCycle(){ // Floyds cycle algorithm
+            Node slow = head;
+            Node fast = head;
+
+            while(fast != null && fast.next != null){
+                slow = slow.next;   //+1
+                fast = fast.next.next;  //+2
+                if(slow == fast){
+                    return true;    //Cycle exists
+                }
+            }
+            return false;   //Cycle doesnt exists
+        }
+
 
     public static void main(String args[]) {
         Linked ll = new Linked();
